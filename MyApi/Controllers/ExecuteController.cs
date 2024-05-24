@@ -20,6 +20,10 @@ namespace MyApi.Controllers
                     return NotFound("Executable file not found.");
                 }
 
+                // Log or return message indicating work started
+                Console.WriteLine("Work started.");
+                // or return Ok("Work started.");
+
                 using (Process process = new Process())
                 {
                     process.StartInfo.FileName = exePath;
@@ -27,10 +31,16 @@ namespace MyApi.Controllers
                     process.WaitForExit(); // Wait for the executable to finish
                 }
 
+                // Log or return message indicating work finished
+                Console.WriteLine("Work finished.");
+                // or return Ok("Work finished.");
+
                 return Ok("Executable started and completed successfully.");
             }
             catch (Exception ex)
             {
+                // Log or return error message
+                Console.WriteLine($"Error: {ex.Message}");
                 return StatusCode(500, $"Error: {ex.Message}");
             }
         }
