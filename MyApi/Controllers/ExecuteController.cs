@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
 
 namespace MyApi.Controllers
@@ -12,11 +13,21 @@ namespace MyApi.Controllers
         {
             try
             {
-                //https://localhost:7131/api/Execute
-                // Provide the path to your executable file
                 string exePath = @"D:\WTH This Code\test vscommu2\MyApi\MyApi\Content\testBasic.exe";
-                Process.Start(exePath);
-                return Ok("Executable started successfully.");
+
+                if (!System.IO.File.Exists(exePath))
+                {
+                    return NotFound("Executable file not found.");
+                }
+
+                using (Process process = new Process())
+                {
+                    process.StartInfo.FileName = exePath;
+                    process.Start();
+                    process.WaitForExit(); // Wait for the executable to finish
+                }
+
+                return Ok("Executable started and completed successfully.");
             }
             catch (Exception ex)
             {
