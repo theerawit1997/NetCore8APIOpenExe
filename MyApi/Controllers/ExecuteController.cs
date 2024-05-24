@@ -16,7 +16,12 @@ namespace MyApi.Controllers
         {
             try
             {
-                string exePath = @"D:\WTH This Code\test vscommu2\MyApi\MyApi\Content\testBasic.exe";
+                // Log or return message indicating work started
+                Console.WriteLine("testBasic!!");
+                LogMessage("testBasic!!");
+                string exePath = @"D:\WTH This Code\test vscommu\testBasic\testBasic\bin\Debug\app.publish\testBasic.exe";
+                Console.WriteLine($"exePath: {exePath}");
+                LogMessage($"exePath: {exePath}");
 
                 if (!System.IO.File.Exists(exePath))
                 {
@@ -24,6 +29,8 @@ namespace MyApi.Controllers
                     return NotFound("Executable file not found.");
                 }
 
+                // Log or return message indicating work started
+                Console.WriteLine("Work started.");
                 LogMessage("Work started.");
 
                 using (Process process = new Process())
@@ -33,12 +40,15 @@ namespace MyApi.Controllers
                     process.WaitForExit(); // Wait for the executable to finish
                 }
 
+                // Log or return message indicating work finished
+                Console.WriteLine("Work finished.");
                 LogMessage("Work finished.");
 
                 return Ok("Executable started and completed successfully.");
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Error: {ex.Message}");
                 LogError($"Error: {ex.Message}");
                 return StatusCode(500, $"Error: {ex.Message}");
             }
