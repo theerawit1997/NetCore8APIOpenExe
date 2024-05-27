@@ -7,21 +7,21 @@ namespace MyApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExecuteController : ControllerBase
+    public class TestController : ControllerBase
     {
         private const string LogFilePath = @"D:\WTH This Code\test vscommu2\MyApi\MyApi\Content\log.txt";
 
         [HttpGet]
-        public IActionResult ExecuteFile()
+        public IActionResult Test()
         {
             try
             {
                 // Log or return message indicating work started
-                Console.WriteLine("testBasic!!");
-                LogMessage("testBasic!!");
+                Console.WriteLine("Test!!");
+                LogMessage("Test!!");
                 string exePath = @"D:\WTH This Code\test vscommu\testBasic\testBasic\bin\Debug\app.publish\testBasic.exe";
-                Console.WriteLine($"exePath: {exePath}");
-                LogMessage($"exePath: {exePath}");
+                //Console.WriteLine($"exePath: {exePath}");
+                //LogMessage($"exePath: {exePath}");
 
                 if (!System.IO.File.Exists(exePath))
                 {
