@@ -60,7 +60,8 @@ namespace MyApi.Controllers
             {
                 using (StreamWriter writer = new StreamWriter(LogFilePath, true))
                 {
-                    writer.WriteLine($"{DateTime.Now}: {message}");
+                    string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss}: {message}";
+                    writer.WriteLine(logEntry);
                 }
             }
             catch (Exception ex)
